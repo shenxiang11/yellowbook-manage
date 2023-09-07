@@ -1,4 +1,4 @@
-import {PageContainer, ProCard, ProLayout, ProSettings} from "@ant-design/pro-components";
+import {PageContainer, ProLayout, ProSettings} from "@ant-design/pro-components";
 import {
     ChromeFilled,
     CrownFilled, GithubFilled,
@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import {useState} from "react";
 import {Input} from "antd";
+import {Outlet} from "react-router-dom";
 
 const defaultProps = {
     route: {
@@ -156,7 +157,7 @@ const defaultProps = {
     ],
 };
 
-function App() {
+function Layout() {
 
     const settings: ProSettings | undefined = {
         fixSiderbar: true,
@@ -277,13 +278,11 @@ function App() {
               {...settings}
           >
               <PageContainer>
-                  <ProCard>
-                      123
-                  </ProCard>
+                  <Outlet />
               </PageContainer>
           </ProLayout>
       </div>
   )
 }
 
-export default App
+export default Layout

@@ -5,6 +5,7 @@ import type {GetUserListRequest, User} from "../../proto/proto/user.ts";
 import {getUsers} from "../../api/users";
 import {useMemo} from "react";
 import dayjs from "dayjs";
+import time from "../../lib/time.tsx";
 
 const emptyQuery = {
     birthday: undefined,
@@ -118,11 +119,11 @@ export default function UserList() {
                     phone: query.phone,
                     introduction: query.introduction,
                     nickname: query.nickname,
-                    birthday: query.birthday ? dayjs(query.birthday).valueOf() : undefined,
-                    createTimeEnd: query.createTimeEnd ? dayjs(query.createTimeEnd).valueOf() : undefined,
-                    createTimeStart: query.createTimeStart ? dayjs(query.createTimeStart).valueOf() : undefined,
-                    updateTimeEnd: query.updateTimeEnd ? dayjs(query.updateTimeEnd).valueOf() : undefined,
-                    updateTimeStart: query.updateTimeStart ? dayjs(query.updateTimeStart).valueOf() : undefined,
+                    birthday: query.birthday ? time(query.birthday).utc(true).valueOf() : undefined,
+                    createTimeEnd: query.createTimeEnd ? time(query.createTimeEnd).valueOf() : undefined,
+                    createTimeStart: query.createTimeStart ? time(query.createTimeStart).valueOf() : undefined,
+                    updateTimeEnd: query.updateTimeEnd ? time(query.updateTimeEnd).valueOf() : undefined,
+                    updateTimeStart: query.updateTimeStart ? time(query.updateTimeStart).valueOf() : undefined,
                 });
                 return {
                     data: res.data.data.list,

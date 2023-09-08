@@ -1,16 +1,16 @@
 import axios from "axios";
 import snakeCase from 'lodash-es/snakeCase'
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
+import time from "./time.tsx";
 
 const instance = axios.create({
    baseURL: "http://localhost:9090",
    withCredentials: true,
 });
 
+const userTimezone = time.tz.guess();
 
-dayjs.extend(timezone);
-const userTimezone = dayjs.tz.guess();
+console.log(+time('1993-12-10 00:00:00'));
+console.log(+time('1993-12-10 00:00:00').utc(true));
 
 instance.interceptors.request.use(
      (config) => {

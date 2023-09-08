@@ -1,10 +1,5 @@
 import request from "../../lib/request";
-import type {GetUserListResponse} from "../../proto/proto/user.ts";
-
-type GetUserRequest = {
-    page: number,
-    pageSize: number,
-}
+import type {GetUserListRequest, GetUserListResponse} from "../../proto/proto/user.ts";
 
 interface HttpResponse<T> {
     code: number,
@@ -12,8 +7,8 @@ interface HttpResponse<T> {
     data: T
 }
 
-export async function getUsers(params: GetUserRequest) {
-    return request.get<HttpResponse<GetUserListResponse>>("/users/list", {
-        params,
+export async function getUsers(params: Partial<GetUserListRequest>) {
+    return request.post<HttpResponse<GetUserListResponse>>("/users/list", {
+        ...params,
     });
 }
